@@ -1,8 +1,10 @@
 import Image from "next/image";
 import React from "react";
 import moment from "moment";
+import Link from "next/link";
 
 const LargeNewsCard = ({ image, publishedAt, title, source }) => {
+  const redirectUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/article/${title}`;
   return (
     <div className="flex flex-col md:flex-row gap-6 items-start">
       <img
@@ -18,9 +20,11 @@ const LargeNewsCard = ({ image, publishedAt, title, source }) => {
           <span className="text-lg font-extrabold text-center">.</span>
           <span>{moment(new Date(publishedAt)).fromNow()}</span>
         </div>
-        <span className="text-[24px] font-semibold text-center md:text-start cursor-pointer">
-          {title}
-        </span>
+        <Link href={redirectUrl}>
+          <span className="text-[24px] font-semibold text-center md:text-start cursor-pointer">
+            {title}
+          </span>
+        </Link>
       </div>
     </div>
   );

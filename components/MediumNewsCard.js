@@ -1,7 +1,9 @@
 import React from "react";
 import moment from "moment";
+import Link from "next/link";
 
 const MediumNewsCard = ({ image, publishedAt, source, title }) => {
+  const redirectUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/article/${title}`;
   return (
     <div className="flex flex-col gap-3 md:items-start items-center">
       <img
@@ -19,9 +21,11 @@ const MediumNewsCard = ({ image, publishedAt, source, title }) => {
           </div>
           <span>{moment(new Date(publishedAt)).fromNow()}</span>
         </div>
-        <span className="text-[24px] md:text-[16px] font-semibold md:w-[300px] md:h-fit cursor-pointer">
-          {title}
-        </span>
+        <Link href={redirectUrl}>
+          <span className="text-[24px] md:text-[16px] font-semibold md:w-[300px] md:h-fit cursor-pointer">
+            {title}
+          </span>
+        </Link>
       </div>
     </div>
   );
