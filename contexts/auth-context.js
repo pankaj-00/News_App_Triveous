@@ -16,7 +16,11 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState();
+  let initialUser = null;
+  if (typeof window !== "undefined" && window.localStorage) {
+    initialUser = window.localStorage.getItem("user");
+  }
+  const [currentUser, setCurrentUser] = useState(initialUser);
   const [loading, setLoading] = useState(true);
 
   function googleSignIn() {
@@ -31,6 +35,9 @@ export function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
       setLoading(false);
+      if (typeof window !== "undefined" && window.localStorage) {
+        window.localStorage.setItem("user", user);
+      }
     });
     return unsubscribe;
   }, []);

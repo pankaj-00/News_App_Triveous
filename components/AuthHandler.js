@@ -26,7 +26,7 @@ const AuthHandler = () => {
   };
   console.log(currentUser);
   return currentUser ? (
-    <div className="flex gap-2 items-center" onClick={handleLogout}>
+    <div className="flex gap-6 items-center">
       <Image
         src={currentUser.photoURL}
         alt="profile-pic"
