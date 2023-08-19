@@ -18,13 +18,21 @@ const AuthHandler = () => {
   //   const navigate = useNavigate();
   const { googleSignIn, currentUser, logOut } = useAuth();
   const handleGoogleSignin = async () => {
-    await googleSignIn();
+    try {
+      await googleSignIn();
+      window.location.reload();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   const handleLogout = async () => {
-    await logOut();
-    window.location.reload();
+    try {
+      await logOut();
+      window.location.reload();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
-  console.log(currentUser);
   return currentUser ? (
     <div className="flex gap-6 items-center">
       <Image

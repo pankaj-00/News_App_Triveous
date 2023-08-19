@@ -27,20 +27,29 @@ const ToggleViewButton = ({
 
 const NewsFeed = () => {
   const [selectedOption, setSelectedOption] = useState("list");
+  const [liked, setLiked] = useState([]);
   const changeViewHandler = (label) => {
     setSelectedOption(label.toLowerCase());
   };
 
   const { articles } = useArticles();
+
+  const { likedItems } = useArticles();
+  useEffect(() => {
+    setLiked(likedItems);
+    console.log(liked);
+  }, []);
+
   return (
     <div className="flex flex-col w-full items-start gap-12">
       <div className="flex w-full justify-center gap-2 mb-10">
-        {viewOptions.map((option) => (
+        {viewOptions.map((option, ind) => (
           <ToggleViewButton
             Icon={option.icon}
             label={option.label}
             changeViewHandler={changeViewHandler}
             selectedOption={selectedOption}
+            key={option.label + ind}
           />
         ))}
       </div>
@@ -60,6 +69,10 @@ const NewsFeed = () => {
               image={article.urlToImage}
               publishedAt={article.publishedAt}
               source={article.source.name}
+              liked={liked}
+              setLiked={setLiked}
+              urlToFullArticle={article.url}
+              key={article.title + article.source}
             />
           ) : (
             <MediumNewsCard
@@ -67,6 +80,10 @@ const NewsFeed = () => {
               image={article.urlToImage}
               publishedAt={article.publishedAt}
               source={article.source.name}
+              liked={liked}
+              setLiked={setLiked}
+              urlToFullArticle={article.url}
+              key={article.title + article.source}
             />
           )
         )}

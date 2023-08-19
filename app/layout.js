@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Footer from "@/components/Footer";
 import { AuthProvider } from "@/contexts/auth-context";
 import { ArticlesProvider } from "@/contexts/article-context";
 
@@ -20,7 +19,6 @@ export default function RootLayout({ children }) {
           <ArticlesProvider>
             <Navbar />
             {children}
-            <Footer />
           </ArticlesProvider>
         </AuthProvider>
       </body>
