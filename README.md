@@ -49,6 +49,11 @@ const firebaseConfig = {
 };
 
 export default firebaseConfig;
+```
+
+4. Get your News API key from https://newsapi.org/docs/get-started and create a new environment varible name NEXT_PUBLIC_NEWS_API_KEY and set it to the API key.
+
+
 
 
 
